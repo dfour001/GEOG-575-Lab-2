@@ -1,0 +1,17 @@
+.states {
+    
+}
+
+.gratLines {
+    fill: none;
+    stroke: #999;
+    stroke-width: 1px;
+}
+
+.chart {
+    border: 1px solid grey;
+}
+
+.numbers {
+    fill: white;
+}
