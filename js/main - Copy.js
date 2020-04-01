@@ -4,11 +4,11 @@
 
     // Chart frame dimensions
     var chartWidth = window.innerWidth * 0.425,
-        chartHeight = 463,
+        chartHeight = 460,
         leftPadding = 28,
         rightPadding = 2,
-        topBottomPadding = 10,
         chartInnerWidth = chartWidth - leftPadding - rightPadding,
+        topBottomPadding = 5,
         chartInnerHeight = chartHeight - topBottomPadding * 2,
         translate = 'translate(' + leftPadding + ',' + topBottomPadding + ')';
 
@@ -16,8 +16,13 @@
 
     // Create a scale to size bars proportionally to frame
     var yScale = d3.scaleLinear()
+        .range([463, 0])
+        .domain([0, 500]);
+
+    var yAxisScale = d3.scaleLinear()
         .range([chartInnerHeight, 0])
-        .domain([0, 350]);
+        .domain([0, 500]);
+
 
     // Begin script when window loads
     window.onload = setMap();
@@ -180,10 +185,10 @@
                 return i * (chartInnerWidth / csvData.length);
             })
             .attr('height', function (d) {
-                return chartInnerHeight - yScale(parseFloat(d[expressed]));
+                return yScale(parseFloat(d[expressed]));
             })
             .attr('y', function (d) {
-                return yScale(parseFloat(d[expressed]));
+                return yScale(parseFloat(d[expressed])) + topBottomPadding;
             })
             .style('fill', function (d) {
                 return colorScale(d[expressed])
@@ -192,7 +197,7 @@
 
         //create vertical axis generator
         var yAxis = d3.axisLeft()
-            .scale(yScale)
+            .scale(yAxisScale)
 
         //place axis
         var axis = chart.append("g")
@@ -255,26 +260,23 @@
                 return b[expressed] - a[expressed];
             })
             .transition()
-            .delay(function(d, i) {
-                return i * 20
-            })
             .attr('x', function (d, i) {
                 return i * (chartInnerWidth / csvData.length);
             })
             .attr('height', function (d) {
-                return chartInnerHeight - yScale(parseFloat(d[expressed]));
+                return yScale(parseFloat(d[expressed]));
             })
             .attr('y', function (d) {
-                return yScale(parseFloat(d[expressed]));
+                return chartHeight - yScale(parseFloat(d[expressed])) + topBottomPadding;
             })
             .style('fill', function (d) {
                 return colorScale(d[expressed])
             });
-
+        
         // Update chart title        
         var chartTitle = d3.select('.chartTitle')
             .text('Number of Variable ' + expressed + ' in each state');
-
+        
         console.log(expressed);
     }
 })();
