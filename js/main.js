@@ -77,7 +77,19 @@
                 .attr('d', path)
                 .style('fill', function (d) {
                     return colorScale(d.properties[expressed])
+                })
+                .on('mouseover', function (d) {
+                    highlight(d.properties);
+                })
+                .on('mouseout', function (d) {
+                    dehighlight(d.properties);
+                })
+                .on('mousemove', function () {
+                    moveLabel();
                 });
+
+            var desc = lyrStates.append("desc")
+                .text('{"stroke": "#000", "stroke-width": "0.5px"}');
 
             // Add coordinated visualization to the map
             setChart(csvData, colorScale);
@@ -107,7 +119,7 @@
             // Loop through csv to assign each set of csv ttribute values to geojson state
             for (let i = 0; i < csvData.length; i++) {
                 let csvState = csvData[i]; // The curent state
-                let csvKey = csvState.State; // The CSV primary key
+                let csvKey = csvState.postal; // The CSV primary key
 
                 // Loop through geoson states to find correct state
                 for (let a = 0; a < dataStates.length; a++) {
@@ -188,7 +200,13 @@
             .style('fill', function (d) {
                 return colorScale(d[expressed])
             })
-            .attr('transform', translate);
+            .attr('transform', translate)
+            .on('mouseover', highlight)
+            .on('mouseout', dehighlight)
+            .on('mousemove', moveLabel);
+
+        var desc = bars.append("desc")
+            .text('{"stroke": "none", "stroke-width": "0px"}');
 
         //create vertical axis generator
         var yAxis = d3.axisLeft()
@@ -255,7 +273,7 @@
                 return b[expressed] - a[expressed];
             })
             .transition()
-            .delay(function(d, i) {
+            .delay(function (d, i) {
                 return i * 20
             })
             .attr('x', function (d, i) {
@@ -267,6 +285,9 @@
             .attr('y', function (d) {
                 return yScale(parseFloat(d[expressed]));
             })
+            .attr("class", function (d) {
+                return "bars " + d.postal;
+            })
             .style('fill', function (d) {
                 return colorScale(d[expressed])
             });
@@ -275,6 +296,81 @@
         var chartTitle = d3.select('.chartTitle')
             .text('Number of Variable ' + expressed + ' in each state');
 
-        console.log(expressed);
     }
+
+    // Function to highlight states and bars
+    function highlight(props) {
+        // Change stroke
+        var selected = d3.selectAll('.' + props.postal)
+            .style('stroke', 'blue')
+            .style('stroke-width', '2');
+
+        setLabel(props);
+    }
+
+    //function to reset the element style on mouseout
+    function dehighlight(props) {
+        var selected = d3.selectAll("." + props.postal)
+            .style("stroke", function () {
+                return getStyle(this, "stroke")
+            })
+            .style("stroke-width", function () {
+                return getStyle(this, "stroke-width")
+            });
+
+        d3.select(".infolabel")
+            .remove();
+
+        function getStyle(element, styleName) {
+            var styleText = d3.select(element)
+                .select("desc")
+                .text();
+
+            var styleObject = JSON.parse(styleText);
+
+            return styleObject[styleName];
+        };
+    };
+
+    //function to create dynamic label
+    function setLabel(props) {
+        //label content
+        var labelAttribute = "<p>" + props.postal + "</p><h1>" + props[expressed] +
+            "</h1><b>" + expressed + "</b>";
+
+        //create info label div
+        var infolabel = d3.select("body")
+            .append("div")
+            .attr("class", "infolabel")
+            .attr("id", props.postal + "_label")
+            .html(labelAttribute);
+
+        var regionName = infolabel.append("div")
+            .attr("class", "labelname")
+            .html(props.name);
+    };
+
+    //function to move info label with mouse
+    function moveLabel() {
+        //get width of label
+        var labelWidth = d3.select(".infolabel")
+            .node()
+            .getBoundingClientRect()
+            .width;
+
+        //use coordinates of mousemove event to set label coordinates
+        var x1 = d3.event.clientX + 10,
+            y1 = d3.event.clientY - 75,
+            x2 = d3.event.clientX - labelWidth - 10,
+            y2 = d3.event.clientY + 25;
+
+        //horizontal label coordinate, testing for overflow
+        var x = d3.event.clientX > window.innerWidth - labelWidth - 20 ? x2 : x1;
+        //vertical label coordinate, testing for overflow
+        var y = d3.event.clientY < 75 ? y2 : y1;
+
+        d3.select(".infolabel")
+            .style("left", x + "px")
+            .style("top", y + "px");
+    };
 })();
