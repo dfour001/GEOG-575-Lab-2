@@ -1,5 +1,5 @@
-var attrArray = ['AllClasses', 'BodyAttack', 'BodyCombat', 'BodyPump', 'BodyStep', 'Sprint']; // List of attributes
-var expressed = attrArray[0]; // Initial attribute
+var attrArray = ['AllClasses', 'BodyAttack', 'BodyCombat', 'BodyPump', 'BodyStep', 'Sprint', 'BodyAttack_Count', 'BodyCombat_Count', 'BodyPump_Count', 'BodyStep_Count', 'Sprint_Count']; // List of attributes
+var expressed = attrArray[1]; // Initial attribute
 
 // Chart frame dimensions
 var chartWidth = $('#chart').width(),
@@ -16,7 +16,7 @@ var chartWidth = $('#chart').width(),
 // Create a scale to size bars proportionally to frame
 var yScale = d3.scaleLinear()
     .range([chartInnerHeight, 0])
-    .domain([0, 350]);
+    .domain([0, 35]);
 
 // Begin script when window loads
 window.onload = setMap();
@@ -93,10 +93,12 @@ function setMap() {
         // Add coordinated visualization to the map
         setChart(csvData, colorScale);
 
-        createDropdown(csvData);
-
         // Setup event listeners for the class buttons
         set_class_buttons(csvData);
+
+        // Set style for BodyAttack button
+        $('#defButton').css('color', '#fec424');
+        $('#defLabel').css('color', 'white');
     }
 
 
@@ -118,7 +120,7 @@ function setMap() {
     function join_data(dataStates, csvData) {
         // Join dataStates and csvData by postal code
 
-        // Loop through csv to assign each set of csv ttribute values to geojson state
+        // Loop through csv to assign each set of csv attribute values to geojson state
         for (let i = 0; i < csvData.length; i++) {
             let csvState = csvData[i]; // The curent state
             let csvKey = csvState.postal; // The CSV primary key
@@ -145,13 +147,20 @@ function setMap() {
 }
 
 function make_color_scale(data) {
-    let colorClasses = [
-                "#D4B9DA",
-                "#C994C7",
-                "#DF65B0",
-                "#DD1C77",
-                "#980043"
-            ];
+    // Color palette for each class
+    let classPalette = {
+        'BodyAttack': ['#664f0e', '#8c6c14', '#b48b1a', '#daa81f', '#fec424'],
+        'BodyCombat': ['#353200', '#413e00', '#4e4a00', '#686300', '#817b00'],
+        'BodyPump': ['#660000', '#8c0000', '#b30000', '#da0000', '#fe0000'],
+        'BodyStep': ['#002e36', '#004450', '#005a69', '#006f83', '#00859c'],
+        'Sprint': ['#4e4620', '#675d2b', '#8d803b', '#b4a24a', '#d2be57']
+    }
+    
+    // Assign color based on selected class
+    // As cool as it is to change colors, it made it difficult to read
+    // differences in the map between attributes, so all classes will use
+    // BodyAttack's gold color.
+    let colorClasses = classPalette['BodyAttack'];
 
     // Create color scale generator
     let colorScale = d3.scaleQuantile()
@@ -222,10 +231,10 @@ function setChart(csvData, colorScale) {
 
     // Chart title
     var chartTitle = chart.append('text')
-        .attr('x', 20)
+        .attr('x', 40)
         .attr('y', 40)
         .attr('class', 'chartTitle')
-        .text('Number of Variable ' + expressed + ' in each state');
+        .text('Number of gyms offering ' + expressed + ' in each state per million people');
 }
 
 function createDropdown(csvData) {
@@ -304,7 +313,7 @@ function changeAttribute(attribute, csvData) {
 function highlight(props) {
     // Change stroke
     var selected = d3.selectAll('.' + props.postal)
-        .style('stroke', 'blue')
+        .style('stroke', '#c8c8c8')
         .style('stroke-width', '2');
 
     setLabel(props);
@@ -313,12 +322,7 @@ function highlight(props) {
 //function to reset the element style on mouseout
 function dehighlight(props) {
     var selected = d3.selectAll("." + props.postal)
-        .style("stroke", function () {
-            return getStyle(this, "stroke")
-        })
-        .style("stroke-width", function () {
-            return getStyle(this, "stroke-width")
-        });
+        .style("stroke-width", "0px");
 
     d3.select(".infolabel")
         .remove();
@@ -337,8 +341,11 @@ function dehighlight(props) {
 //function to create dynamic label
 function setLabel(props) {
     //label content
-    var labelAttribute = "<p>" + props.postal + "</p><h1>" + props[expressed] +
-        "</h1><b>" + expressed + "</b>";
+    console.log(props);
+    
+    var classState = "<p><b>" + props[expressed + "_Count"] + "</b><small> gyms offer " + expressed + " in <b>" + props.postal + "</b></small></p>";
+    var count = "<p>(<b>" + props[expressed] + "</b><small> gyms per million people)</small></p>";
+    var labelAttribute = classState + count;
 
     //create info label div
     var infolabel = d3.select("body")
@@ -359,17 +366,22 @@ function moveLabel() {
         .node()
         .getBoundingClientRect()
         .width;
-
-    //use coordinates of mousemove event to set label coordinates
-    var x1 = d3.event.clientX + 10,
-        y1 = d3.event.clientY - 75,
-        x2 = d3.event.clientX - labelWidth - 10,
-        y2 = d3.event.clientY + 25;
+    
+    var labelHeight = d3.select(".infolabel")
+        .node()
+        .getBoundingClientRect()
+        .height;
+    
+    //use coordinates of mousemove event to set label coordinates    
+    var x1 = d3.event.pageX + 10,
+        y1 = d3.event.pageY - labelHeight - 10,
+        x2 = d3.event.pageX - labelWidth - 5,
+        y2 = d3.event.pageY + 25;
 
     //horizontal label coordinate, testing for overflow
-    var x = d3.event.clientX > window.innerWidth - labelWidth - 20 ? x2 : x1;
+    var x = d3.event.pageX > window.innerWidth - labelWidth - 20 ? x2 : x1;
     //vertical label coordinate, testing for overflow
-    var y = d3.event.clientY < 75 ? y2 : y1;
+    var y = d3.event.pageY < 75 ? y2 : y1;
 
     d3.select(".infolabel")
         .style("left", x + "px")

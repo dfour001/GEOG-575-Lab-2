@@ -1,5 +1,5 @@
-BodyAttack - #fec424
-BodyCombat - #817b00
-BodyPump - #fe0000
-BodyStep - #00859c
-Sprint - #d2be57
+var classPalette = {'BodyAttack': ['#664f0e','#8c6c14','#b48b1a','#daa81f','#fec424'],
+'BodyCombat': ['#353200','#413e00','#4e4a00','#686300','#817b00'],
+'BodyPump': ['#660000','#8c0000','#b30000','#da0000','#fe0000'],
+'BodyStep': ['#002e36','#004450','#005a69','#006f83','#00859c'],
+'Sprint': ['#4e4620','#675d2b','#8d803b','#b4a24a','#d2be57']}

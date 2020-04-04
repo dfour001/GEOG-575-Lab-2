@@ -27,19 +27,16 @@ body {
 
 .infolabel {
     position: absolute;
-    height: 50px;
     min-width: 100px;
-    color: #fff;
-    background-color: #000;
+    color: white;
+    background-color: #353535;
     border: solid thin #fff;
     padding: 5px 10px;
+    font-size: 0.8em;
 }
 
-.infolabel h1 {
-    margin: 0 20px 0 0;
-    padding: 0;
-    display: inline-block;
-    line-height: 1em;
+.infolabel p {
+    margin: 0;
 }
 
 .button-container {
@@ -53,9 +50,7 @@ body {
     height: 4em;
     width: 4em;
     margin: auto;
-    background-color: grey;
     border-radius: 50%;
-
     background: #353535;
     box-shadow: 5px 5px 18px rgba(8.2, 8.2, 8.2, 1),
         -3px -3px 5px rgba(100.3, 100.3, 100.3, 0.75),
@@ -83,4 +78,8 @@ body {
 
 .button-label {
     font-size: 0.75em;
+    margin-top: 5px;
+    margin-bottom: 10px;
 }
+
+
