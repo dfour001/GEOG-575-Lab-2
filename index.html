@@ -1,43 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<!-- Required meta tags -->
-	<meta charset="utf-8">
-	<meta name="description" content="">
-	<meta name="author" content="">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-	<title>GEOG-575 Lab 2: Coordinated Visualization w/ D3</title>
+    <title>GEOG-575 Lab 2: Coordinated Visualization w/ D3</title>
 
-	<link rel="shortcut icon" href="" type="image/x-icon">
-	<link rel="apple-touch-icon" href="">
+    <link rel="shortcut icon" href="" type="image/x-icon">
+    <link rel="apple-touch-icon" href="">
 
-	<!-- Bootstrap CSS -->
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-	
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
     <!-- Custom CSS -->
-	<link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css">
 
 </head>
 
 <body>
-	<!-- Start coding here -->
+    <!-- Start coding here -->
+    <nav id="title" class="navbar navbar-expand-md navbar-dark fixed-top title">
+        <div class="container">
+            <a class="navbar-brand" href="#">Les Mills Classes by State</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" target="_blank"href="https://www.lesmills.com/find-a-class/#facType=modal&filterType=0&classes=0">Find a Class</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-	<h1>D3 is cool!</h1>
+    <div class="container-fluid">
+        <div class="row">
+            <p>(v.o) Yeah, this could get heavy Doc. (mutters to himself) Heavy, heavy. (w.t) Whatever happens, you must not let your other self see you. The consequences could be disastrous. Excuse me, sir. Yes, you with the hat. (1985 Doc pulls down his hat so that the 1955 Doc won’t recognize him.) Who me?</p>
+        </div>
 
-	<!-- Coding End -->
+        <ul class="nav justify-content-center">
+            <div class='button-container'>
+                <div class='button active' data-class="BA"><p>BA</p></div>
+                <div class='button-label'>BodyAttack</div>
+            </div>
+            
+            <div class='button-container'>
+                <div class='button' data-class="BP"><p>BP</p></div>
+                <div class='button-label'>BodyPump</div>
+            </div>
+            
+            <div class='button-container'>
+                <div class='button' data-class="BC"><p>BC</p></div>
+                <div class='button-label'>BodyCombat</div>
+            </div>
+            
+            <div class='button-container'>
+                <div class='button' data-class="BS"><p>BS</p></div>
+                <div class='button-label'>BodyStep</div>
+            </div>
+            
+            <div class='button-container'>
+                <div class='button' data-class="S"><p>S</p></div>
+                <div class='button-label'>Sprint</div>
+            </div>
+            
+        </ul>
+        <div class="row">
+            <div id="map" class="col-md-6"></div>
+            <div id="chart" class="col-md-6"></div>
 
-	<!-- jQuery, Popper.js, and Bootstrap JS -->
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    
+        </div>
+    </div>
+
+    <!-- Coding End -->
+
+    <!-- jQuery, Popper.js, and Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
     <!-- D3 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.js"></script>
     <script src="lib/d3-queue/d3-queue.min.js"></script>
     <script src="lib/topojson/topojson.min.js"></script>
-    
+
     <!-- Main JS -->
+    <script src="js/selectClassButtons.js"></script>
     <script src="js/main.js"></script>
-</body>
-</html>
+</body></html>

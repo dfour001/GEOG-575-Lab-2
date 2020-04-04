@@ -1,0 +1,5 @@
+BodyAttack - #fec424
+BodyCombat - #817b00
+BodyPump - #fe0000
+BodyStep - #00859c
+Sprint - #d2be57

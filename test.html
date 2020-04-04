@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+
+<body>
+    <div class="button active"></div>
+    <div class="button inactive"></div>
+    <div class="button inactive"></div>
+    <div class="button inactive"></div>
+    <div class="button inactive"></div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    
+    <script>
+        $('.button').on('click', function() {
+            $('.button').removeClass('active');
+            $(this).addClass('active');
+            console.log(this);
+        })
+    
+    </script>
+</body></html>
+<style>
+    body {
+        background: #55b9f3;
+        cursor: pointer;
+    }
+    
+    .button {
+        width: 100px;
+        height: 100px;
+        display: inline-block;
+        margin: 15px;
+        border-radius: 50%;
+        background: #55b9f3;
+        box-shadow:  7px 7px 14px rgba(75,163,214,1), 
+                     -7px -7px 14px rgba(95,207,255,1),
+                    inset 7px 7px 14px rgba(75,163,214,0), 
+                    inset -7px -7px 14px rgba(95,207,255,0);
+        
+        transition: box-shadow 0.25s ease-out;
+    }
+    
+    
+    .active {     
+        border-radius: 50%;
+        box-shadow: 7px 7px 14px rgba(75,163,214,0), 
+                     -7px -7px 14px rgba(95,207,255,0),
+                    inset 7px 7px 14px rgba(75,163,214,1), 
+                    inset -7px -7px 14px rgba(95,207,255,1);
+    }
+    
+</style>

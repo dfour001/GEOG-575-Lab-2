@@ -1,6 +1,15 @@
-.states {
-    
+body {
+    background-image: url(../img/prism.png);
+    padding-top: 75px;
 }
+
+
+.title {
+    background: #303030;
+    border-bottom: 2px solid #989898;
+}
+
+.states {}
 
 .gratLines {
     fill: none;
@@ -31,4 +40,47 @@
     padding: 0;
     display: inline-block;
     line-height: 1em;
+}
+
+.button-container {
+    margin: 10px;
+    text-align: center;
+    position: relative;
+    color: #989898;
+}
+
+.button {
+    height: 4em;
+    width: 4em;
+    margin: auto;
+    background-color: grey;
+    border-radius: 50%;
+
+    background: #353535;
+    box-shadow: 5px 5px 18px rgba(8.2, 8.2, 8.2, 1),
+        -3px -3px 5px rgba(100.3, 100.3, 100.3, 0.75),
+        inset 9px 9px 18px rgba(8.2, 8.2, 8.2, 0),
+        inset -9px -9px 18px rgba(33.3, 33.3, 33.3, 0);
+    transition: box-shadow 0.2s ease;
+    
+    cursor: pointer;
+}
+
+.active {
+    box-shadow: 5px 5px 18px rgba(8.2, 8.2, 8.2, 0),
+        -5px -5px 18px rgba(33.3, 33.3, 33.3, 0),
+        inset 3px 3px 10px rgba(8.2, 8.2, 8.2, 1),
+        inset -3px -3px 5px rgba(100.3, 100.3, 100.3, 1);
+}
+
+.button p {
+    position: absolute;
+    font-size: 1.75em;
+    left: 0px;
+    right: 0px;
+    line-height: 2.25em;
+}
+
+.button-label {
+    font-size: 0.75em;
 }
