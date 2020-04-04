@@ -15,6 +15,10 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300&family=Pathway+Gothic+One&display=swap" rel="stylesheet"> 
+    
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/style.css">
 
@@ -31,10 +35,7 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" target="_blank"href="https://www.lesmills.com/find-a-class/#facType=modal&filterType=0&classes=0">Find a Class</a>
+                        <a class="nav-link" target="_blank"href="https://www.lesmills.com/find-a-class/#facType=modal&filterType=0&classes=0">Find a Class Near You</a>
                     </li>
                 </ul>
             </div>
@@ -43,12 +44,12 @@
 
     <div class="container-fluid">
         <div class="row">
-            <p>(v.o) Yeah, this could get heavy Doc. (mutters to himself) Heavy, heavy. (w.t) Whatever happens, you must not let your other self see you. The consequences could be disastrous. Excuse me, sir. Yes, you with the hat. (1985 Doc pulls down his hat so that the 1955 Doc won’t recognize him.) Who me?</p>
+            <p class="intro">(v.o) Yeah, this could get heavy Doc. (mutters to himself) Heavy, heavy. (w.t) Whatever happens, you must not let your other self see you. The consequences could be disastrous. Excuse me, sir. Yes, you with the hat. (1985 Doc pulls down his hat so that the 1955 Doc won’t recognize him.) Who me?</p>
         </div>
 
         <ul class="nav justify-content-center">
             <div class='button-container'>
-                <div id='defButton' class='button active' data-class="BA"><p>BA</p></div>
+                <div id='defButton' class='button' data-class="BA"><p>BA</p></div>
                 <div id='defLabel' class='button-label'>BodyAttack</div>
             </div>
             
@@ -75,7 +76,9 @@
         </ul>
         <div class="row">
             <div id="map" class="col-md-6"></div>
-            <div id="chart" class="col-md-6"></div>
+            <div id="chart" class="col-md-6">
+                <p class='chart-label'>Number of gyms offering <b><span id='lblClass'>BodyAttack</span></b> in each state per million people</p>
+            </div>
 
         </div>
     </div>

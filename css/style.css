@@ -1,25 +1,56 @@
 body {
     background-image: url(../img/prism.png);
     padding-top: 75px;
+
+    font-family: 'Oswald', sans-serif;
 }
 
+.intro {
+    color: white;
+    padding-left: 25px;
+    padding-right: 25px;
+}
 
 .title {
     background: #303030;
     border-bottom: 2px solid #989898;
+
+    font-family: 'Pathway Gothic One', sans-serif;
 }
 
-.states {}
+.states,
+.bars {
+    stroke: black;
+    stroke-width: 0.5px;
+}
+
 
 .gratLines {
     fill: none;
-    stroke: #999;
+    stroke: grey;
     stroke-width: 1px;
 }
 
-.chart {
-    border: 1px solid grey;
+
+.chart-label {
+    position: absolute;
+    right: 25px;
+    top: 20px;
+    max-width: 50%;
+    color: white;
 }
+
+.tick text {
+    fill: white;
+    stroke-width: 0.5px;
+}
+
+.axis path,
+.tick line {
+    stroke: grey;
+    stroke-width: 1px;
+}
+
 
 .numbers {
     fill: white;
@@ -32,7 +63,7 @@ body {
     background-color: #353535;
     border: solid thin #fff;
     padding: 5px 10px;
-    font-size: 0.8em;
+    font-size: 1em;
 }
 
 .infolabel p {
@@ -57,7 +88,7 @@ body {
         inset 9px 9px 18px rgba(8.2, 8.2, 8.2, 0),
         inset -9px -9px 18px rgba(33.3, 33.3, 33.3, 0);
     transition: box-shadow 0.2s ease;
-    
+
     cursor: pointer;
 }
 
@@ -81,5 +112,3 @@ body {
     margin-top: 5px;
     margin-bottom: 10px;
 }
-
-

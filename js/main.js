@@ -40,8 +40,9 @@ function setMap() {
         .center([0, 38.6])
         .rotate([99, 0, 0])
         .parallels([43, 62])
-        .scale(width)
+        .scale(width + 30)
         .translate([width / 2, height / 2]);
+        
 
     let path = d3.geoPath()
         .projection(projection);
@@ -88,7 +89,7 @@ function setMap() {
             });
 
         var desc = lyrStates.append("desc")
-            .text('{"stroke": "#000", "stroke-width": "0.5px"}');
+            .text('{"stroke": "black", "stroke-width": "0.75px"}');
 
         // Add coordinated visualization to the map
         setChart(csvData, colorScale);
@@ -97,8 +98,7 @@ function setMap() {
         set_class_buttons(csvData);
 
         // Set style for BodyAttack button
-        $('#defButton').css('color', '#fec424');
-        $('#defLabel').css('color', 'white');
+        $('#defButton').click();
     }
 
 
@@ -186,6 +186,16 @@ function setChart(csvData, colorScale) {
         .attr('width', chartWidth)
         .attr('height', chartHeight)
         .attr('class', 'chart');
+    
+    // Create chart outline
+    var outline = chart.append('rect')
+        .attr('x', leftPadding)
+        .attr('y', topBottomPadding)
+        .attr('width', chartInnerWidth)
+        .attr('height', chartInnerHeight)
+        .attr('stroke', 'grey')
+        .attr('stroke-width', '1px')
+        .attr('fill', 'transparent');
 
     // Set bars for each state
     var bars = chart.selectAll('.bars')
@@ -228,13 +238,6 @@ function setChart(csvData, colorScale) {
         .attr("class", "axis")
         .attr("transform", translate)
         .call(yAxis);
-
-    // Chart title
-    var chartTitle = chart.append('text')
-        .attr('x', 40)
-        .attr('y', 40)
-        .attr('class', 'chartTitle')
-        .text('Number of gyms offering ' + expressed + ' in each state per million people');
 }
 
 function createDropdown(csvData) {
@@ -302,10 +305,8 @@ function changeAttribute(attribute, csvData) {
         .style('fill', function (d) {
             return colorScale(d[expressed])
         });
-
     // Update chart title        
-    var chartTitle = d3.select('.chartTitle')
-        .text('Number of gyms offering ' + expressed + ' in each state per million people');
+    $('#lblClass').text(expressed);
 
 }
 
@@ -322,26 +323,16 @@ function highlight(props) {
 //function to reset the element style on mouseout
 function dehighlight(props) {
     var selected = d3.selectAll("." + props.postal)
-        .style("stroke-width", "0px");
+        .style("stroke", "black")
+        .style("stroke-width", "0.5px");
 
     d3.select(".infolabel")
         .remove();
-
-    function getStyle(element, styleName) {
-        var styleText = d3.select(element)
-            .select("desc")
-            .text();
-
-        var styleObject = JSON.parse(styleText);
-
-        return styleObject[styleName];
-    };
 };
 
 //function to create dynamic label
 function setLabel(props) {
     //label content
-    console.log(props);
     
     var classState = "<p><b>" + props[expressed + "_Count"] + "</b><small> gyms offer " + expressed + " in <b>" + props.postal + "</b></small></p>";
     var count = "<p>(<b>" + props[expressed] + "</b><small> gyms per million people)</small></p>";
