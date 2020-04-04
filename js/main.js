@@ -3,7 +3,7 @@ var expressed = attrArray[1]; // Initial attribute
 
 // Chart frame dimensions
 var chartWidth = $('#chart').width(),
-    chartHeight = 463,
+    chartHeight = chartWidth * 0.5,
     leftPadding = 28,
     rightPadding = 2,
     topBottomPadding = 10,
@@ -26,7 +26,7 @@ window.onload = setMap();
 function setMap() {
     // Map frame dimensions
     let width = $('#map').width(),
-        height = 460;
+        height = width * 0.5;
 
     // Create new svg container for the map
     let map = d3.select('#map')
@@ -37,10 +37,10 @@ function setMap() {
 
     // Create Albers equal area conic projection centered on United States
     let projection = d3.geoAlbers()
-        .center([0, 33.6])
+        .center([0, 38.6])
         .rotate([99, 0, 0])
         .parallels([43, 62])
-        .scale(705)
+        .scale(width)
         .translate([width / 2, height / 2]);
 
     let path = d3.geoPath()
@@ -305,7 +305,7 @@ function changeAttribute(attribute, csvData) {
 
     // Update chart title        
     var chartTitle = d3.select('.chartTitle')
-        .text('Number of Variable ' + expressed + ' in each state');
+        .text('Number of gyms offering ' + expressed + ' in each state per million people');
 
 }
 
