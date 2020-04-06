@@ -44,7 +44,8 @@
 
     <div class="container-fluid">
         <div class="row">
-            <p class="intro">(v.o) Yeah, this could get heavy Doc. (mutters to himself) Heavy, heavy. (w.t) Whatever happens, you must not let your other self see you. The consequences could be disastrous. Excuse me, sir. Yes, you with the hat. (1985 Doc pulls down his hat so that the 1955 Doc won’t recognize him.) Who me?</p>
+            <p class="intro">Les Mills, a New Zealand based company named for the retired olympian, publishes a series of athletic classes that are taught in gyms around the world. Each class features exercises that are choreographed to popular music.  The map below shows the number of gyms in each state that teach the selected class.  Hover over or tap a state or bar below for more details.</p>
+            <p class="intro text-center">BodyAttack: Sports-derived Cardio • BodyPump: Barbell Weight Lifting • BodyCombat: Martial-arts Inspired Workout • BodyStep: Step Aerobic Workout • Sprint: HIIT Biking</p>
         </div>
 
         <ul class="nav justify-content-center">
@@ -74,13 +75,24 @@
             </div>
             
         </ul>
+        <hr>
+        <h2 class='chart-label'>Number of gyms offering <b><span id='lblClass'>BodyAttack</span></b> in each state per million people</h2>
+        <div class="row">
+            <div class="legend">
+                <p class="legend-label">More Gyms</p>
+                <div class="legend-box box-1"></div><div class="legend-box box-2"></div><div class="legend-box box-3"></div><div class="legend-box box-4"></div><div class="legend-box box-5"></div>
+                <p class="legend-label">Fewer Gyms</p>
+            </div>
+        </div>
         <div class="row">
             <div id="map" class="col-md-6"></div>
             <div id="chart" class="col-md-6">
-                <p class='chart-label'>Number of gyms offering <b><span id='lblClass'>BodyAttack</span></b> in each state per million people</p>
+                
             </div>
 
         </div>
+        <hr>
+        <p class="sources">Data Sources - Gym class data: <a href="https://www.lesmills.com/find-a-class/#facType=modal&filterType=0&classes=0" target="_blank">Les Mills Find a Class Map</a> • Map data: <a href="https://www.naturalearthdata.com/" target="_blank">Natural Earth</a></p>
     </div>
 
     <!-- Coding End -->

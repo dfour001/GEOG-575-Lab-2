@@ -18,6 +18,11 @@ body {
     font-family: 'Pathway Gothic One', sans-serif;
 }
 
+.text-center {
+    margin: auto;
+    margin-bottom: 25px;
+}
+
 .states,
 .bars {
     stroke: black;
@@ -31,12 +36,14 @@ body {
     stroke-width: 1px;
 }
 
-
+hr {
+    border-color: grey;
+}
 .chart-label {
-    position: absolute;
-    right: 25px;
-    top: 20px;
-    max-width: 50%;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 25px;
+    text-align: center;
     color: white;
 }
 
@@ -111,4 +118,61 @@ body {
     font-size: 0.75em;
     margin-top: 5px;
     margin-bottom: 10px;
+}
+
+.legend {
+    color: white;
+    font-size: 0.8em;
+    text-align: center;
+    margin: auto;
+}
+
+.legend-label {
+    display: inline-block;
+}
+
+.legend-box {
+    border: 1px solid white;
+    border-right: 0px;
+    height: 0.75em;
+    width: 50px;
+    display: inline-block;
+    margin: 0px;
+    padding: 0px;
+    
+}
+
+.box-1 {
+    background-color: #fec424;
+    margin-left: 5px;
+}
+
+.box-2 {
+    background-color: #daa81f;
+}
+
+.box-3 {
+    background-color: #b48b1a;
+}
+
+.box-4 {
+    background-color: #8c6c14;
+}
+
+.box-5 {
+    background-color: #664f0e;
+    border-right: 1px solid white;
+    margin-right: 5px;
+}
+
+.sources {
+    color: white;
+    font-size: 0.75em;
+    text-align: center;
+}
+
+@media only screen and (max-width: 768px) {
+    .legend-box {
+        width: 25px;
+    }
 }
